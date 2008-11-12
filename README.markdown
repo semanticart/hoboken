@@ -19,6 +19,7 @@ then visit:  http://0.0.0.0:4567/ or visit http://0.0.0.0:4567/Whatever to start
 Standard WikiText applies per the wikitext gem.
 
 ## TODO:
+* default css template
 * add viewing old version
 * config files
 * reverting to previous versions
