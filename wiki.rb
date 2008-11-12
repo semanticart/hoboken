@@ -1,6 +1,8 @@
 %w(rubygems dm-core dm-is-versioned dm-timestamps sinatra wikitext init).each { |lib| require lib }
 
 get '/' do
+  @article = Article.first(:slug => 'Index')
+  @article ||= Article.create(:slug => "Index", :title => "Index", :body => "you can edit this content")
   @recent = Article.all(:order => [:updated_at.desc], :limit => 10)
   haml :index
 end
@@ -30,5 +32,10 @@ post '/' do
   else
     @article = Article.create(attributes)
   end
-  redirect "/#{params[:slug]}"
+
+  if @article.slug =~ /^index$/i
+    redirect "/"
+  else
+    redirect "/#{params[:slug]}"
+  end
 end

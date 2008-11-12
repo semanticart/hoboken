@@ -5,7 +5,12 @@
   %a{:href => "http://sinatra.rubyforge.org/"} sinatra
   wiki
 
+%article_body
+  = PARSER.parse(@article.body)
+
 - unless @recent.empty?
+  %p
+    Recent items
   %ul
     - @recent.each do |article|
       %li
