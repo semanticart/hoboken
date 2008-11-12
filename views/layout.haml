@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title
+      = "#{@article.title} &ndash; " if @article
+      hoboken, a sinatra wiki"
+  %body
+    = yield
+    %footer
+      %a{:href => "/"} home
+      - if @article
+        &#124;
+        %a{:href => "/#{@article.slug}/edit"} edit

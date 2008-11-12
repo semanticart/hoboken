@@ -1,0 +1,16 @@
+%h1 
+  Welcome to hoboken
+%h4
+  a
+  %a{:href => "http://sinatra.rubyforge.org/"} sinatra
+  wiki
+
+- unless @recent.empty?
+  %ul
+    - @recent.each do |article|
+      %li
+        %a{:href => article.slug}
+          = article.title
+- else
+  %p
+    You have no entries yet.  You should create one by visiting "/YourArticleTitle"

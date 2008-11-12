@@ -1,0 +1,21 @@
+%form{:action => "/", :method=>"post"}
+  %h1
+    = "#{@action.first} #{@article.title}"
+  %p
+    %label{:for => :title} Title
+    %br
+    %input{:type => :text, :name => :title, :id => :title, :value => @article.title}
+
+  %p
+    %label{:for => :slug} Slug
+    %br
+    %input{:type => :text, :name => :slug, :id => :slug, :value => @article.slug}
+
+  %p
+    %label{:for => :body} Body
+    %br
+    %textarea{:cols => 70, :rows => 20, :name => :body, :id => :body}
+      = @article.body
+
+  %p
+    %input{:type => :submit, :value => @action.last}
