@@ -22,6 +22,7 @@ Standard WikiText applies per the wikitext gem.
 
 ## TODO:
 * default css template
+* authentication
 * add viewing old version
 * config files
 * reverting to previous versions
