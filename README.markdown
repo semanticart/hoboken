@@ -18,7 +18,7 @@ You can install wikitext from http://github.com/stephenjudkins/ruby-wikitext/tre
 
 then visit:  http://0.0.0.0:4567/ or visit http://0.0.0.0:4567/Whatever to start creating a page named "Whatever"
 
-Standard WikiText applies per the wikitext gem.
+Standard WikiText applies per the wikitext gem.  Versioning is active, you just can't view the old versions or restore them yet.
 
 ## TODO:
 * default css template
