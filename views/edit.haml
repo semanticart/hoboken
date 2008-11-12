@@ -14,8 +14,9 @@
   %p
     %label{:for => :body} Body
     %br
-    %textarea{:cols => 70, :rows => 20, :name => :body, :id => :body}
-      = @article.body
+    = find_and_preserve do
+      %textarea{:cols => 70, :rows => 20, :name => :body, :id => :body}
+        =@article.body
 
   %p
     %input{:type => :submit, :value => @action.last}
