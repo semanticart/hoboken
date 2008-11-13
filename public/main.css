@@ -1,0 +1,46 @@
+BODY{
+	font-family:Helvetica, Arial;
+	font-size:1em;
+}
+
+H1{
+	font-size:2.2em;
+}
+
+strong{
+	font-weight:normal;
+	font-size:1.1em;
+}
+
+#main{
+	width: 80%;
+	margin: 10px auto;
+}
+#sidebar {
+  float:right;
+  padding: 0px;
+  width: 150px;
+}
+
+#sidebar ul{
+	list-style:none;
+}
+
+li{
+	margin-top:3px;
+}
+
+#content {
+  margin-left: 0px;
+  padding: 0px;
+  margin-right: 200px;
+}
+
+#footer {
+	clear:both;
+	border-top:1px solid #ddd;
+	margin-top:20px;
+	padding-top:3px;
+	text-align:center;
+	font-size:.8em;
+}

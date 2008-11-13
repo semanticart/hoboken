@@ -2,9 +2,9 @@
 
 get '/' do
   @article = Article.first(:slug => 'Index')
-  @article ||= Article.create(:slug => "Index", :title => "Index", :body => "you can edit this content")
+  @article ||= Article.create(:slug => "Index", :title => "Index", :body => "Welcome to hoboken.  You can edit this content")
   @recent = Article.all(:order => [:updated_at.desc], :limit => 10)
-  haml :index
+  haml :show
 end
 
 get '/:slug' do

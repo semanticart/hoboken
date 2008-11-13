@@ -1,13 +1,30 @@
 !!!
 %html
   %head
-    %title
-      = "#{@article.title} &ndash; " if @article
-      hoboken, a sinatra wiki"
+    %title= "#{@article.title} &ndash; hoboken"
+    %link{:href=>"/main.css", :media=>"screen", :rel=>"Stylesheet", :type=>"text/css"}
+
   %body
-    = yield
-    %footer
-      %a{:href => "/"} home
-      - if @article
-        &#124;
-        %a{:href => "/#{@article.slug}/edit"} edit
+    #main
+      #sidebar
+        %p
+          %strong Navigation
+          %ul
+            %li
+              %a{:href => "/"} home
+            - if @article
+              %li
+                %a{:href => "/#{@article.slug}/edit"} edit
+        - if @recent
+          %p
+            %strong Recent items
+          %ul
+            - @recent.each do |article|
+              %li
+                %a{:href => article.slug}
+                  = article.title
+      #content
+        = yield
+      #footer
+        powered by
+        %a{:href=>"http://github.com/jchupp/hoboken/tree/master"} hoboken
