@@ -9,7 +9,7 @@ Leverages the ruby framework sinatra to provide a very(!) basic wiki.
 * sinatra
 * wikitext
 
-dm-is-versioned and dm-timestamps are part of dm-more.  You also need a dm compatible database adapter (sqlite3, mysql, etc.).  If you want to use something other than sqlite3, you'll need to edit init.rb until a proper config file system is added.
+dm-is-versioned and dm-timestamps are part of dm-more.  You'll need at least 0.9.7.  You also need a dm compatible database adapter (sqlite3, mysql, etc.).  If you want to use something other than sqlite3, you'll need to edit init.rb until a proper config file system is added.
 
 You can install wikitext from http://github.com/stephenjudkins/ruby-wikitext/tree/master.
 
@@ -22,7 +22,6 @@ Standard WikiText applies per the wikitext gem.  Versioning is active, you just 
 
 ## TODO:
 * authentication
-* add viewing old version
 * config files
 * reverting to previous versions
 * diffs on versions

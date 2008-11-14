@@ -1,0 +1,6 @@
+%h1="Versions of #{@article.title}"
+-@article.versions.reverse.each_with_index do |article, i|
+  %div{:class => "history#{( i % 2 == 0 ? '_alt' : '')}"}
+    .history_title= article.title
+    .history_body= PARSER.parse(article.body)
+    .history_date= article.updated_at

@@ -44,3 +44,25 @@ li{
 	text-align:center;
 	font-size:.8em;
 }
+
+.history, .history_alt{
+	padding:14px;
+}
+
+.history{
+	background:#eee;
+}
+
+.history_title{
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+.history_body{
+	padding-left:20px;
+}
+
+.history_date{
+	font-size:0.4em;
+	text-align:right;
+}
