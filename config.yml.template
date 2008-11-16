@@ -1,0 +1,5 @@
+--- 
+development:
+  db_connection: sqlite3:///ROOT/wiki.db
+test: 
+  db_connection: "sqlite3::memory:"

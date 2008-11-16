@@ -1,4 +1,13 @@
-%w(rubygems dm-core dm-is-versioned dm-timestamps sinatra wikitext init).each { |lib| require lib }
+require 'rubygems'
+require 'sinatra'
+require 'init'
+
+helpers do
+  # break up a CamelCased word into something more readable
+  def de_wikify(phrase)
+    phrase.gsub(/(\w)([A-Z])/, "\\1 \\2")
+  end
+end
 
 get '/' do
   @article = Article.first(:slug => 'Index')

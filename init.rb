@@ -1,6 +1,16 @@
-DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/wiki.db")
+%w(dm-core dm-is-versioned dm-timestamps wikitext).each { |lib| require lib }
+ROOT = "#{Dir.pwd}"
+
+config = begin
+  YAML.load(File.read("#{ROOT}/config.yml").gsub(/ROOT/, ROOT))
+rescue => ex
+  raise "Cannot read the config.yml file at #{ROOT}/config.yml - #{ex.message}"
+end
+
+DataMapper.setup(:default, config[Sinatra.application.options.env.to_s]['db_connection'])
 
 PARSER = Wikitext::Parser.new
+PARSER.external_link_class = 'external'
 PARSER.internal_link_prefix = nil
 
 class Article
@@ -15,10 +25,4 @@ class Article
   property :updated_at,       DateTime
 
   is :versioned, :on => :updated_at
-end
-
-Article.auto_migrate! unless File.exist?("#{Dir.pwd}/wiki.db")
-
-def de_wikify(phrase)
-  phrase.gsub(/(\w)([A-Z])/, "\\1 \\2")
 end
