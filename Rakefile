@@ -1,6 +1,8 @@
 require 'spec/rake/spectask'
 
 task :environment do
+  ENVIRONMENT = 'development'
+  require 'rubygems'
   require 'init'
 end
 

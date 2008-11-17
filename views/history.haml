@@ -5,4 +5,4 @@
   %div{:class => "history#{( i % 2 == 0 ? '_alt' : '')}"}
     .history_title= article.title
     .history_body= PARSER.parse(article.body)
-    .history_date= article.updated_at
+    .history_date= friendly_time(article.updated_at)

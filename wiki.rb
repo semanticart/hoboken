@@ -7,6 +7,10 @@ helpers do
   def de_wikify(phrase)
     phrase.gsub(/(\w)([A-Z])/, "\\1 \\2")
   end
+
+  def friendly_time(time)
+    time.strftime("%a. %b. %d, %Y, %I:%M%p")
+  end
 end
 
 get '/' do

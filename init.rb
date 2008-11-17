@@ -7,7 +7,7 @@ rescue => ex
   raise "Cannot read the config.yml file at #{ROOT}/config.yml - #{ex.message}"
 end
 
-DataMapper.setup(:default, config[Sinatra.application.options.env.to_s]['db_connection'])
+DataMapper.setup(:default, config[(defined?(ENVIRONMENT) ? ENVIRONMENT : Sinatra.application.options.env.to_s)]['db_connection'])
 
 PARSER = Wikitext::Parser.new
 PARSER.external_link_class = 'external'
