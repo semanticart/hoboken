@@ -29,5 +29,4 @@ Standard WikiText applies per the wikitext gem.  Versioning is active, you just 
 
 ## TODO:
 * authentication
-* reverting to previous versions
 * diffs on versions
