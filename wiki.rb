@@ -4,6 +4,7 @@ require 'init'
 
 helpers do
   # break up a CamelCased word into something more readable
+  # this is used when you create a new page by visiting /NewItem
   def de_wikify(phrase)
     phrase.gsub(/(\w)([A-Z])/, "\\1 \\2")
   end
@@ -56,4 +57,12 @@ get '/:slug/edit' do
   @article = Article.first(:slug => params[:slug])
   @action = ["Editing", "Edit"]
   haml :edit
+end
+
+post '/:slug/edit' do
+  @article = Article.first(:slug => params[:slug])
+  @current_body = @article.body
+  @article.body = params[:body] if params[:body]
+  @action = ["Reverting", "Save"]
+  haml :revert
 end

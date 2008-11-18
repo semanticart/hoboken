@@ -6,3 +6,6 @@
     .history_title= article.title
     .history_body= PARSER.parse(article.body)
     .history_date= friendly_time(article.updated_at)
+    %form{:action => "/#{@article.slug}/edit", :method=>'post'}
+      %input{:type => 'hidden', :name => 'body', :value => article.body}
+      %input{:type => 'submit', :value => 'Restore'}
