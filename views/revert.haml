@@ -16,7 +16,7 @@
     %br
     = find_and_preserve do
       %textarea{:cols => 70, :rows => 10, :name => :body, :id => :current_body}
-        =@current_body
+        =@article.original_values[:body]
 
   %p
     %label{:for => :body} Desired Body

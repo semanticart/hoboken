@@ -15,26 +15,15 @@ helpers do
 end
 
 get '/' do
-  @article = Article.first(:slug => 'Index')
-  @article ||= Article.create(:slug => "Index", :title => "Index", :body => "Welcome to hoboken.  You can edit this content")
+  @article = Article.first_or_create(:slug => 'Index')
   @recent = Article.all(:order => [:updated_at.desc], :limit => 10)
   haml :show
 end
 
 post '/' do
-  @article = Article.first(:slug => params[:slug])
-  attributes = {:title => params[:title], :body => params[:body], :slug => params[:slug]}
-  if @article
-    @article.update_attributes(attributes)
-  else
-    @article = Article.create(attributes)
-  end
-
-  if @article.slug =~ /^index$/i
-    redirect "/"
-  else
-    redirect "/#{params[:slug]}"
-  end
+  @article = Article.first_or_create(:slug => params[:slug])
+  @article.update_attributes(:title => params[:title], :body => params[:body], :slug => params[:slug])
+  redirect "/#{params[:slug].gsub(/^index$/i, '')}"
 end
 
 get '/:slug' do
@@ -61,7 +50,6 @@ end
 
 post '/:slug/edit' do
   @article = Article.first(:slug => params[:slug])
-  @current_body = @article.body
   @article.body = params[:body] if params[:body]
   @action = ["Reverting", "Save"]
   haml :revert

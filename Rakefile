@@ -14,4 +14,5 @@ end
 desc 'migrate the article table'
 task :migrate => [:environment] do 
   Article.auto_migrate!
+  Article.create(:slug => "Index", :title => "Index", :body => "Welcome to hoboken.  You can edit this content")
 end
