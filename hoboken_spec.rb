@@ -24,7 +24,7 @@ describe 'Hoboken' do
   it "should show an index" do
     get_it '/'
     @response.should be_ok
-    @response.body.should include('You can edit this content')
+    @response.body.should include('Recent items')
   end
 
   it "should allow creating new articles" do

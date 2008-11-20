@@ -1,6 +1,20 @@
 require 'rubygems'
 require 'sinatra'
-require 'init'
+
+configure do
+  %w(dm-core dm-is-versioned dm-timestamps wikitext article).each { |lib| require lib }
+
+  ROOT = File.expand_path(File.dirname(__FILE__))
+  config = begin
+    YAML.load(File.read("#{ROOT}/config.yml").gsub(/ROOT/, ROOT))
+  rescue => ex
+    raise "Cannot read the config.yml file at #{ROOT}/config.yml - #{ex.message}"
+  end
+
+  DataMapper.setup(:default, config[Sinatra.application.options.env.to_s]['db_connection'])
+
+  PARSER = Wikitext::Parser.new(:external_link_class => 'external', :internal_link_prefix => nil)
+end
 
 helpers do
   # break up a CamelCased word into something more readable
