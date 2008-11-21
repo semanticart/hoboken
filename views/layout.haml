@@ -1,24 +1,24 @@
 !!!
-%html
+%html{:xmlns=>'http://www.w3.org/1999/xhtml', :'xml:lang'=>'en', :lang=>'en'}
   %head
     %title= "#{@article.title} &ndash; hoboken"
-    %link{:href=>"/main.css", :media=>"screen", :rel=>"Stylesheet", :type=>"text/css"}
+    %link{:href=>'/main.css', :media=>'screen', :rel=>'Stylesheet', :type=>'text/css'}
 
   %body
     #main
       #sidebar
-        %p
+        %div
           %strong Navigation
-          %ul
+        %ul
+          %li
+            %a{:href => '/'} home
+          - if @article
             %li
-              %a{:href => "/"} home
-            - if @article
-              %li
-                %a{:href => "/#{@article.slug}/edit"} edit
-              %li
-                %a{:href => "/#{@article.slug}/history"} history
+              %a{:href => "/#{@article.slug}/edit"} edit
+            %li
+              %a{:href => "/#{@article.slug}/history"} history
         - if @recent
-          %p
+          %div
             %strong Recent items
           %ul
             - @recent.each do |article|
@@ -29,4 +29,4 @@
         = yield
       #footer
         powered by
-        %a{:href=>"http://github.com/jchupp/hoboken/tree/master"} hoboken
+        %a{:href=>'http://github.com/jchupp/hoboken/tree/master'} hoboken
