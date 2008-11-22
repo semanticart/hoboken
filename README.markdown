@@ -25,7 +25,10 @@ To create you're database.  Now you're ready to run.
 
 then visit:  http://0.0.0.0:4567/ or visit http://0.0.0.0:4567/Whatever to start creating a page named "Whatever"
 
-Standard WikiText applies per the wikitext gem.  Versioning is active, you just can't restore the old versions yet.
+Standard WikiText applies per the wikitext gem.  Versioning is active, though complex diffs on versions aren't yet available and merging is still rudimentary.
+
+### Auto-linking
+You can specify words in your config.yml that will be automatically converted into internal links.  These words are case-sensitive.  You can use simple regular expressions to match.  For instance, Project\d+ would match the word Project followed immediately by one or more numbers and link to that projects proper page.  Note that auto-linking is done on the show template instead of before saving the data.  This prevents unwanted transformations overwriting your actually input data.
 
 ## TODO:
 * authentication
