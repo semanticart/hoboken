@@ -1,4 +1,6 @@
 class Article
+  REP = '<+<<*>>+>'
+
   include DataMapper::Resource
 
   property :id,               Serial
@@ -11,18 +13,12 @@ class Article
 
   is :versioned, :on => :updated_at
 
-  # if an auto_link set is defined in config.yml, automatically turn
-  # those words into internal links.  Case matters.
   def auto_link
-    if defined?(AUTO_LINK_REGEXP)
-      keeps = []
-      altered = body.gsub(/\[+.*?\]+/) do |match|
-        keeps << match
-        REP
-      end
-      altered.gsub(AUTO_LINK_REGEXP, "[[\\1]]").gsub(REP){|match| keeps.shift}
-    else
-      body
+    keeps = []
+    altered = body.gsub(/\[+.*?\]+/) do |match|
+      keeps << match
+      REP
     end
+    altered.gsub(Regexp.new("(#{Article.all.map{|x| x.slug}.join("|")})"), "[[\\1]]").gsub(REP){|match| keeps.shift}
   end
 end

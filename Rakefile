@@ -1,9 +1,16 @@
 require 'spec/rake/spectask'
 
 task :environment do
-  ENVIRONMENT = 'development'
-  require 'rubygems'
-  require 'init'
+  %w(dm-core dm-is-versioned dm-timestamps wikitext article).each { |lib| require lib }
+
+  ROOT = File.expand_path(File.dirname(__FILE__))
+  config = begin
+    YAML.load(File.read("#{ROOT}/config.yml").gsub(/ROOT/, ROOT))['development']
+  rescue => ex
+    raise "Cannot read the config.yml file at #{ROOT}/config.yml - #{ex.message}"
+  end
+
+  DataMapper.setup(:default, config['db_connection'])
 end
 
 desc "Run all specs"

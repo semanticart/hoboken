@@ -13,11 +13,6 @@ configure do
 
   DataMapper.setup(:default, config['db_connection'])
 
-  if config['auto_link']
-    Article::REP = '<+<<*>>+>'
-    Article::AUTO_LINK_REGEXP = Regexp.new("(#{config['auto_link'].join("|")})")
-  end
-
   PARSER = Wikitext::Parser.new(:external_link_class => 'external', :internal_link_prefix => nil)
 end
 
