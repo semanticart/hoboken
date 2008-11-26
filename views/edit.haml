@@ -1,6 +1,12 @@
 %form{:action => "/", :method=>"post"}
   %h1
-    = "#{@action.first} #{@article.title}"
+    = "#{action.first} #{@article.title}"
+  -if params[:body]
+    %h3
+      Preview
+    %p
+      =PARSER.parse(params[:body])
+    %hr
   %p
     %label{:for => :title} Title
     %br
@@ -16,7 +22,12 @@
     %br
     = find_and_preserve do
       %textarea{:cols => 70, :rows => 15, :name => :body, :id => :body}
-        =@article.body
+        =params[:body] || @article.body
 
+    %input{:type => 'hidden', :name => 'preview', :value => '0'}
   %p
-    %input{:type => :submit, :value => @action.last}
+    %button{:onClick => "window.location='/#{@article.slug.gsub(/'/, "\'") if @article.id }';return false;"} Cancel
+    &nbsp; &nbsp;
+    %input{:type => :submit, :value => 'Preview', :onClick => "document.forms[0].preview.value=1"}
+    &nbsp; &nbsp;
+    %input{:type => :submit, :value => action.last}

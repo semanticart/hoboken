@@ -36,8 +36,12 @@ end
 
 post '/' do
   @article = Article.first_or_create(:slug => params[:slug])
-  @article.update_attributes(:title => params[:title], :body => params[:body], :slug => params[:slug])
-  redirect "/#{params[:slug].gsub(/^index$/i, '')}"
+  unless params[:preview] == '1'
+    @article.update_attributes(:title => params[:title], :body => params[:body], :slug => params[:slug])
+    redirect "/#{params[:slug].gsub(/^index$/i, '')}"
+  else
+    haml :edit, :locals => {:action => ["Editing", "Edit"]}
+  end
 end
 
 get '/:slug' do
@@ -46,8 +50,7 @@ get '/:slug' do
     haml :show
   else
     @article = Article.new(:slug => params[:slug], :title => de_wikify(params[:slug]))
-    @action = ["Creating", "Create"]
-    haml :edit
+    haml :edit, :locals => {:action => ["Creating", "Create"]}
   end
 end
 
@@ -58,13 +61,11 @@ end
 
 get '/:slug/edit' do
   @article = Article.first(:slug => params[:slug])
-  @action = ["Editing", "Edit"]
-  haml :edit
+  haml :edit, :locals => {:action => ["Editing", "Edit"]}
 end
 
 post '/:slug/edit' do
   @article = Article.first(:slug => params[:slug])
   @article.body = params[:body] if params[:body]
-  @action = ["Reverting", "Save"]
   haml :revert
 end

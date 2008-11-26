@@ -1,6 +1,6 @@
 %form{:action => "/", :method=>"post"}
   %h1
-    = "#{@action.first} #{@article.title}"
+    = "Reverting #{@article.title}"
   %p
     %label{:for => :title} Title
     %br
@@ -26,4 +26,4 @@
         =@article.body
 
   %p
-    %input{:type => :submit, :value => @action.last}
+    %input{:type => :submit, :value => 'save'}
