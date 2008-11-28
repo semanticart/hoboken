@@ -6,7 +6,7 @@ configure do
 
   ROOT = File.expand_path(File.dirname(__FILE__))
   config = begin
-    YAML.load(File.read("#{ROOT}/config.yml").gsub(/ROOT/, ROOT))[Sinatra.application.options.env.to_s]
+    YAML.load(File.read("#{ROOT}/config.yml").gsub(/ROOT/, ROOT))[Sinatra.env.to_s]
   rescue => ex
     raise "Cannot read the config.yml file at #{ROOT}/config.yml - #{ex.message}"
   end

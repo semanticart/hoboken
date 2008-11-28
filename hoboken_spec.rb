@@ -5,6 +5,7 @@ require 'spec'
 require 'sinatra/test/rspec'
 require 'wiki'
 Article.auto_migrate!
+Article.create(:slug => "Index", :title => "Index", :body => "Welcome to hoboken.  You can edit this content")
 
 class Article
   @@count ||= 1
