@@ -15,10 +15,17 @@ class Article
 
   def auto_link
     keeps = []
+    # replace everything currently within brackets with our constant
+    # and save the results
     altered = body.gsub(/\[+.*?\]+/) do |match|
+      # save what we're replacing so we can put it back later
       keeps << match
       REP
     end
-    altered.gsub(Regexp.new("(#{Article.all.map{|x| x.slug}.join("|")})"), "[[\\1]]").gsub(REP){|match| keeps.shift}
+    # auto-link any articles
+    altered.gsub!(Regexp.new("(#{Article.all.map{|x| x.slug}.join("|")})"), "[[\\1]]")
+    # put our original already-bracketed items back
+    altered.gsub!(REP){|match| keeps.shift}
+    altered
   end
 end

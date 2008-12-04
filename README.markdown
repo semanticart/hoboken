@@ -29,6 +29,16 @@ Standard WikiText applies per the wikitext gem.  Versioning is active, though co
 
 When rendering a wiki page, items that exist in the database as other pages will be automatically linked to.
 
+## NOTE:
+
+if you get complaints along the lines of
+
+    Gem::Exception: can't activate data_objects (= 0.9.7, runtime), already activated data_objects-0.9.9
+
+then you should specify a version of data_objects (in wiki.rb underneath "require 'sinatra'") like so
+
+    gem 'data_objects', '0.9.7'
+
 ## TODO:
 * authentication
 * diffs on versions
