@@ -50,4 +50,13 @@ describe 'Hoboken' do
     @response.body.should include(@@article.body)
     @response.body.should include("New content")
   end
+
+  it "should auto-link articles" do
+    post_it '/', {:slug => 'pancakes', :body => 'It is unknown if an aardvark would eat a pancake', :title => 'Pancakes'}
+
+    Article.first(:slug => 'pancakes').auto_link.should include('[[aardvark]]')
+
+    get_it '/pancakes'
+    @response.body.should include('<a href="aardvark">aardvark</a>')
+  end
 end
