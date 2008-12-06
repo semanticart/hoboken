@@ -35,7 +35,7 @@ if you get complaints along the lines of
 
     Gem::Exception: can't activate data_objects (= 0.9.7, runtime), already activated data_objects-0.9.9
 
-then you should specify a version of data_objects (in wiki.rb underneath "require 'sinatra'") like so
+then you should specify a version of data\_objects (in wiki.rb underneath "require 'sinatra'") like so
 
     gem 'data_objects', '0.9.7'
 
