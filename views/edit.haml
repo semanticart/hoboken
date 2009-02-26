@@ -1,6 +1,6 @@
 %form{:action => "/", :method=>"post"}
   %h1
-    = "#{action.first} #{@article.title}"
+    = "#{action.first} #{params[:title] || @article.title}"
   -if params[:body]
     %h3
       Preview
@@ -10,7 +10,7 @@
   %p
     %label{:for => :title} Title
     %br
-    %input{:type => :text, :name => :title, :id => :title, :value => @article.title}
+    %input{:type => :text, :name => :title, :id => :title, :value => params[:title] || @article.title}
 
   %p
     %label{:for => :slug} Slug
