@@ -2,6 +2,6 @@
   = @article.title
 #article_body
   = PARSER.parse(@article.auto_link)
-%article_tags
+#article_tags
   Tags:
   = @article.tag_list.join(', ')

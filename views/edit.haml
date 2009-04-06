@@ -10,18 +10,18 @@
   %p
     %label{:for => :title} Title
     %br
-    %input{:type => :text, :name => :title, :id => :title, :value => params[:title] || @article.title}
+    %input{:type => :text, :name => :title, :id => :title, :value => params[:title] || @article.title, :class => 'std_input'}
 
   %p
     %label{:for => :slug} Slug
     %br
-    %input{:type => :text, :name => :slug, :id => :slug, :value => @article.slug}
+    %input{:type => :text, :name => :slug, :id => :slug, :value => @article.slug, :class => 'std_input'}
 
   %p
     %label{:for => :body} Body
     %br
     = find_and_preserve do
-      %textarea{:cols => 70, :rows => 15, :name => :body, :id => :body}
+      %textarea{:rows => 15, :name => :body, :id => :body, :class => 'std_input'}
         =params[:body] || @article.body
 
     %input{:type => 'hidden', :name => 'preview', :value => '0'}
@@ -29,7 +29,7 @@
   %p
     %label{:for => :tag_list} Tags (separated by commas)
     %br
-    %input{:type => :text, :name => :tag_list, :id => :tag_list, :value => params[:tag_list] || @article.tag_list.join(', ')}
+    %input{:type => :text, :name => :tag_list, :id => :tag_list, :value => params[:tag_list] || @article.tag_list.join(', '), :class => 'std_input'}
 
   %p
     %button{:onClick => "window.location='/#{@article.slug.gsub(/'/, "\'") if @article.id }';return false;"} Cancel
