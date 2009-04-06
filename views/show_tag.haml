@@ -1,0 +1,7 @@
+%h1= @title
+
+%ul
+-@tagged_articles.each do |article|
+  %li
+    %a{:href => article.slug}
+      = article.title

@@ -45,6 +45,13 @@ post '/' do
   end
 end
 
+get '/tags/:tag_name' do
+  tag = Tag.first(:name => params[:tag_name])
+  @tagged_articles = Tagging.all(:tag_id => tag.id, :order => [:id.desc]).map{|t| t.taggable}
+  @title = "Items tagged &quot;#{params[:tag_name]}&quot;"
+  haml :show_tag
+end
+
 get '/:slug' do
   @article = Article.first(:slug => params[:slug])
   if @article

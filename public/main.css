@@ -16,11 +16,6 @@ strong{
 	font-size:1.1em;
 }
 
-#article_tags{
-	font-size:0.7em;
-	color:#333;
-}
-
 #main{
 	width: 80%;
 	margin: 10px auto;
@@ -74,6 +69,21 @@ li{
 .history_date{
 	font-size:0.4em;
 	text-align:right;
+}
+
+#article_tags{
+	margin-top:30px;
+	font-size:0.7em;
+}
+
+#article_tags ul{
+	padding-left:0px;
+}
+
+#article_tags li{
+	list-style:none;
+	display:inline;
+	padding-right:10px;
 }
 
 /* icon borrowed from wikipedia */
