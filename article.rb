@@ -10,6 +10,7 @@ class Article
 
   property :created_at,       DateTime
   property :updated_at,       DateTime
+  has_tags_on :tags
 
   is :versioned, :on => :updated_at
 

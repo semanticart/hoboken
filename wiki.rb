@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 
 configure do
-  %w(dm-core dm-is-versioned dm-timestamps wikitext article).each { |lib| require lib }
+  %w(dm-core dm-is-versioned dm-timestamps dm-tags wikitext article).each { |lib| require lib }
 
   ROOT = File.expand_path(File.dirname(__FILE__))
   config = begin
@@ -12,6 +12,7 @@ configure do
   end
 
   DataMapper.setup(:default, config['db_connection'])
+  DataMapper.auto_upgrade!
 
   PARSER = Wikitext::Parser.new(:external_link_class => 'external', :internal_link_prefix => nil)
 end
@@ -37,7 +38,7 @@ end
 post '/' do
   @article = Article.first_or_create(:slug => params[:slug])
   unless params[:preview] == '1'
-    @article.update_attributes(:title => params[:title], :body => params[:body], :slug => params[:slug])
+    @article.update_attributes(:title => params[:title], :body => params[:body], :slug => params[:slug], :tag_list => params[:tag_list])
     redirect "/#{params[:slug].gsub(/^index$/i, '')}"
   else
     haml :edit, :locals => {:action => ["Editing", "Edit"]}
