@@ -12,6 +12,8 @@
         %ul
           %li
             %a{:href => '/'} home
+          %li
+            %a{:href => "/#{Date.today.to_s}"} today
           - if @article
             %li
               %a{:href => "/#{@article.slug}/edit"} edit
