@@ -15,7 +15,7 @@ end
 
 desc "Run all specs"
 task :spec do
-  puts `ruby hoboken_spec.rb`
+  puts `spec hoboken_spec.rb`
 end
 
 desc 'migrate the article table'

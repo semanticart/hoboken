@@ -1,62 +1,74 @@
 require 'rubygems'
 require 'sinatra'
-Sinatra.application.options.env = 'test'
+Sinatra::Application.environment = 'test'
 require 'spec'
 require 'sinatra/test/rspec'
 require 'wiki'
 Article.auto_migrate!
 Article.create(:slug => "Index", :title => "Index", :body => "Welcome to hoboken.  You can edit this content")
 
-class Article
-  @@count ||= 1
-  # make sure updated_at is always unique
-  before :save do
-    @@count += 1
-    self.updated_at = Time.now + 60 * @@count
-  end
-end
 
 describe 'Hoboken' do
-  
+
   before(:all) do
     @@article = Article.create(:slug => 'aardvark', :title => 'Aardvark', :body => "Commonly spelled incorrectly as 'ardvark'")
   end
-  
+
   it "should show an index" do
-    get_it '/'
+    get '/'
     @response.should be_ok
     @response.body.should include('Recent items')
   end
 
   it "should allow creating new articles" do
     Article.first(:slug => "test").should be_nil
-    get_it '/test'
+    get '/test'
     @response.body.should include('Creating test')
   end
 
   it "should allow viewing and editing existing article" do
-    get_it '/aardvark'
+    get '/aardvark'
     @response.body.should include(@@article.body)
 
-    get_it '/aardvark/edit'
+    get '/aardvark/edit'
     @response.body.should include('Editing Aardvark')
   end
-  
+
   it "should show versions" do
-    post_it '/', {:slug => 'aardvark', :body => 'New content', :title => 'Aardvark'}
-    post_it '/', {:slug => 'aardvark', :body => 'Newer content', :title => 'Aardvark'}
-    
-    get_it '/aardvark/history'
+    # sadly we need to sleep or the updated_at uniqueness constraint of
+    # dm-is-versioned will not be met
+    sleep 1
+    post '/', {:slug => 'aardvark', :body => 'New content', :title => 'Aardvark'}
+    sleep 1
+    post '/', {:slug => 'aardvark', :body => 'Newer content', :title => 'Aardvark'}
+
+    get '/aardvark/history'
     @response.body.should include(@@article.body)
     @response.body.should include("New content")
   end
 
   it "should auto-link articles" do
-    post_it '/', {:slug => 'pancakes', :body => 'It is unknown if an aardvark would eat a pancake', :title => 'Pancakes'}
+    post '/', {:slug => 'pancakes', :body => 'It is unknown if an aardvark would eat a pancake', :title => 'Pancakes'}
 
     Article.first(:slug => 'pancakes').auto_link.should include('[[aardvark]]')
 
-    get_it '/pancakes'
+    get '/pancakes'
     @response.body.should include('<a href="aardvark">aardvark</a>')
   end
+
+  it "should allow tagging" do
+    @@article.tag_list = "out, of, order"
+    @@article.save
+
+    Article.first(:slug => @@article.slug).tag_list.should == %w( of order out)
+  end
+
+  it "should have a show page for tags" do
+    @@article.tag_list = "hey, there"
+    @@article.save
+
+    get '/tags/hey'
+    @response.body.should include(@@article.title)
+  end
+
 end
