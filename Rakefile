@@ -1,7 +1,7 @@
 require 'spec/rake/spectask'
 
 task :environment do
-  %w(dm-core dm-is-versioned dm-timestamps wikitext article).each { |lib| require lib }
+  %w(dm-core dm-is-versioned dm-timestamps dm-tags wikitext article).each { |lib| require lib }
 
   ROOT = File.expand_path(File.dirname(__FILE__))
   config = begin
