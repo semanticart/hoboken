@@ -1,5 +1,5 @@
 # Hoboken
-Leverages the ruby framework sinatra to provide a very(!) basic wiki.  It supports tagging, versions, and (of course) inter-linking, all with the wiki text formatting you're used to (if you've used wikipedia, that is).
+Leverages the ruby framework sinatra to provide a very(!) basic wiki.  It supports tagging, versions, and (of course) inter-linking, all with the wiki text formatting you're used to (if you've used wikipedia, that is).  Oh, hey, it is ruby 1.9 compatible; so there's that...
 
 ## Required Gems
 * dm-core
