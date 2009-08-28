@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 
 configure do
-  %w(dm-core dm-is-versioned dm-timestamps dm-tags wikitext article).each { |lib| require lib }
+  %w(dm-core dm-is-versioned dm-timestamps dm-tags haml wikitext article).each { |lib| require lib }
 
   ROOT = File.expand_path(File.dirname(__FILE__))
   config = begin
